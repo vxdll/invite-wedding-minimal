@@ -31,8 +31,16 @@
 
   "program": [
     { "time": "15:00", "title": "Сбор гостей", "note": "Welcome-фуршет" },
-    { "time": "15:30", "title": "Церемония", "note": "Выездная регистрация в саду" },
-    { "time": "17:00", "title": "Банкет", "note": "Ужин, тосты и тёплые слова" },
+    {
+      "time": "15:30",
+      "title": "Церемония",
+      "note": "Выездная регистрация в саду"
+    },
+    {
+      "time": "17:00",
+      "title": "Банкет",
+      "note": "Ужин, тосты и тёплые слова"
+    },
     { "time": "21:00", "title": "Торт", "note": "" },
     { "time": "23:00", "title": "Завершение вечера", "note": "" }
   ],
@@ -49,10 +57,7 @@
     "colors": ["#E9DFD3", "#C9B8A3", "#A3AE8F", "#6E7B5B", "#3A3A36"]
   },
 
-  "gallery": [
-    "images/photo-1.jpg",
-    "images/photo-2.jpg"
-  ],
+  "gallery": ["images/photo-1.jpg", "images/photo-2.jpg"],
 
   "wishes": [
     "Не ломайте голову над подарком — лучший подарок для нас это вклад в бюджет молодой семьи.",
@@ -61,8 +66,14 @@
 
   "rsvp": {
     "deadlineText": "до 1 мая 2027",
-    "endpoint": "",
-    "drinks": ["Вино красное", "Вино белое", "Шампанское", "Крепкие напитки", "Без алкоголя"]
+    "endpoint": "https://script.google.com/macros/s/AKfycbxM0yf43_1zobEg-ozrlY7IICZgp52wKvz9mwkTSuvp4Wc53G8do9_t0Jv0cVMvUJIcuA/exec",
+    "drinks": [
+      "Вино красное",
+      "Вино белое",
+      "Шампанское",
+      "Крепкие напитки",
+      "Без алкоголя"
+    ]
   },
 
   "contacts": [
