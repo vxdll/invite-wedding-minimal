@@ -1,161 +1,216 @@
 <!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Приглашение на свадьбу</title>
-  <meta name="description" content="">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Приглашение на свадьбу</title>
+    <meta name="description" content="" />
 
-  <!-- Превью ссылки в мессенджерах (Telegram, WhatsApp). Заполняется вручную при сборке под клиента -->
-  <meta property="og:title" content="Приглашение на свадьбу">
-  <meta property="og:description" content="Приглашаем вас разделить с нами радость этого дня">
-  <meta property="og:image" content="images/cover.jpg">
+    <!-- Превью ссылки в мессенджерах (Telegram, WhatsApp). Заполняется вручную при сборке под клиента -->
+    <meta
+      property="og:title"
+      content="Анна и Михаил — приглашение на свадьбу"
+    />
+    <meta
+      property="og:description"
+      content="12 июня 2027 · Приглашаем вас разделить с нами радость этого дня"
+    />
+    <meta
+      property="og:image"
+      content="https://vxdll.github.io/invite-wedding-minimal/images/cover.jpg"
+    />
 
-  <!-- Шрифты: Cormorant Garamond (заголовки, с кириллицей) + Manrope (текст) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Шрифты: Cormorant Garamond (заголовки, с кириллицей) + Manrope (текст) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <!-- ===== 1. ОБЛОЖКА ===== -->
-  <header class="cover" data-block="couple">
-    <div class="cover__photo" id="coverPhoto"></div>
-    <div class="cover__content">
-      <p class="eyebrow">Свадьба</p>
-      <h1 class="cover__names">
-        <span id="name1"></span>
-        <span class="cover__amp">&amp;</span>
-        <span id="name2"></span>
-      </h1>
-      <p class="cover__date" id="coverDate"></p>
-      <a href="#invite" class="cover__scroll" aria-label="Листать вниз">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 9l6 6 6-6"/></svg>
-      </a>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- ===== 2. ПРИГЛАШЕНИЕ + ТАЙМЕР ===== -->
-    <section class="section reveal" id="invite" data-block="invitation">
-      <h2 class="title" id="inviteTitle"></h2>
-      <div class="divider"></div>
-      <p class="lead" id="inviteText"></p>
-
-      <div class="countdown" id="countdown" aria-live="polite">
-        <div class="countdown__item"><span id="cdDays">0</span><small>дней</small></div>
-        <div class="countdown__item"><span id="cdHours">0</span><small>часов</small></div>
-        <div class="countdown__item"><span id="cdMinutes">0</span><small>минут</small></div>
-        <div class="countdown__item"><span id="cdSeconds">0</span><small>секунд</small></div>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===== 1. ОБЛОЖКА ===== -->
+    <header class="cover" data-block="couple">
+      <div class="cover__photo" id="coverPhoto"></div>
+      <div class="cover__content">
+        <p class="eyebrow">Свадьба</p>
+        <h1 class="cover__names">
+          <span id="name1"></span>
+          <span class="cover__amp">&amp;</span>
+          <span id="name2"></span>
+        </h1>
+        <p class="cover__date" id="coverDate"></p>
+        <a href="#invite" class="cover__scroll" aria-label="Листать вниз">
+          <svg
+            viewBox="0 0 24 24"
+            width="22"
+            height="22"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.4"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </a>
       </div>
-    </section>
+    </header>
 
-    <!-- ===== 3. КАЛЕНДАРЬ МЕСЯЦА С ОТМЕЧЕННЫМ ДНЁМ ===== -->
-    <section class="section section--surface reveal" data-block="event">
-      <p class="eyebrow" id="calWeekday"></p>
-      <h2 class="title" id="calMonth"></h2>
-      <div class="calendar" id="calendar"></div>
-      <button class="btn btn--ghost" id="addToCalendar" type="button">Добавить в календарь</button>
-    </section>
+    <main>
+      <!-- ===== 2. ПРИГЛАШЕНИЕ + ТАЙМЕР ===== -->
+      <section class="section reveal" id="invite" data-block="invitation">
+        <h2 class="title" id="inviteTitle"></h2>
+        <div class="divider"></div>
+        <p class="lead" id="inviteText"></p>
 
-    <!-- ===== 4. ПРОГРАММА ДНЯ ===== -->
-    <section class="section reveal" data-block="program">
-      <p class="eyebrow">Тайминг</p>
-      <h2 class="title">Программа дня</h2>
-      <div class="divider"></div>
-      <ol class="timeline" id="timeline"></ol>
-    </section>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div class="countdown__item">
+            <span id="cdDays">0</span><small>дней</small>
+          </div>
+          <div class="countdown__item">
+            <span id="cdHours">0</span><small>часов</small>
+          </div>
+          <div class="countdown__item">
+            <span id="cdMinutes">0</span><small>минут</small>
+          </div>
+          <div class="countdown__item">
+            <span id="cdSeconds">0</span><small>секунд</small>
+          </div>
+        </div>
+      </section>
 
-    <!-- ===== 5. МЕСТО ===== -->
-    <section class="section section--surface reveal" data-block="location">
-      <p class="eyebrow">Место проведения</p>
-      <h2 class="title" id="placeName"></h2>
-      <p class="muted" id="placeAddress"></p>
-      <div class="photo photo--wide" id="placePhoto"></div>
-      <a class="btn" id="mapLink" href="#" target="_blank" rel="noopener">Открыть карту</a>
-    </section>
+      <!-- ===== 3. КАЛЕНДАРЬ МЕСЯЦА С ОТМЕЧЕННЫМ ДНЁМ ===== -->
+      <section class="section section--surface reveal" data-block="event">
+        <p class="eyebrow" id="calWeekday"></p>
+        <h2 class="title" id="calMonth"></h2>
+        <div class="calendar" id="calendar"></div>
+        <button class="btn btn--ghost" id="addToCalendar" type="button">
+          Добавить в календарь
+        </button>
+      </section>
 
-    <!-- ===== 6. ДРЕСС-КОД ===== -->
-    <section class="section reveal" data-block="dresscode">
-      <p class="eyebrow">Внешний вид</p>
-      <h2 class="title">Дресс-код</h2>
-      <div class="divider"></div>
-      <p class="lead" id="dressText"></p>
-      <div class="palette" id="palette"></div>
-    </section>
+      <!-- ===== 4. ПРОГРАММА ДНЯ ===== -->
+      <section class="section reveal" data-block="program">
+        <p class="eyebrow">Тайминг</p>
+        <h2 class="title">Программа дня</h2>
+        <div class="divider"></div>
+        <ol class="timeline" id="timeline"></ol>
+      </section>
 
-    <!-- ===== 7. ФОТО ===== -->
-    <section class="gallery reveal" data-block="gallery" id="gallery"></section>
+      <!-- ===== 5. МЕСТО ===== -->
+      <section class="section section--surface reveal" data-block="location">
+        <p class="eyebrow">Место проведения</p>
+        <h2 class="title" id="placeName"></h2>
+        <p class="muted" id="placeAddress"></p>
+        <div class="photo photo--wide" id="placePhoto"></div>
+        <a class="btn" id="mapLink" href="#" target="_blank" rel="noopener"
+          >Открыть карту</a
+        >
+      </section>
 
-    <!-- ===== 8. ПОЖЕЛАНИЯ / ВИШЛИСТ ===== -->
-    <section class="section section--surface reveal" data-block="wishes">
-      <p class="eyebrow">Детали</p>
-      <h2 class="title">Пожелания</h2>
-      <div class="divider"></div>
-      <div id="wishes"></div>
-    </section>
+      <!-- ===== 6. ДРЕСС-КОД ===== -->
+      <section class="section reveal" data-block="dresscode">
+        <p class="eyebrow">Внешний вид</p>
+        <h2 class="title">Дресс-код</h2>
+        <div class="divider"></div>
+        <p class="lead" id="dressText"></p>
+        <div class="palette" id="palette"></div>
+      </section>
 
-    <!-- ===== 9. АНКЕТА ГОСТЯ (RSVP) ===== -->
-    <section class="section reveal" data-block="rsvp" id="rsvp">
-      <p class="eyebrow">Анкета гостя</p>
-      <h2 class="title">Вы будете с нами?</h2>
-      <div class="divider"></div>
-      <p class="muted">Пожалуйста, ответьте <span id="rsvpDeadline"></span></p>
+      <!-- ===== 7. ФОТО ===== -->
+      <section
+        class="gallery reveal"
+        data-block="gallery"
+        id="gallery"
+      ></section>
 
-      <form class="form" id="rsvpForm" novalidate>
-        <label class="field">
-          <span>Ваше имя и фамилия</span>
-          <input type="text" name="name" required autocomplete="name" placeholder="Например, Ольга Иванова">
-        </label>
+      <!-- ===== 8. ПОЖЕЛАНИЯ / ВИШЛИСТ ===== -->
+      <section class="section section--surface reveal" data-block="wishes">
+        <p class="eyebrow">Детали</p>
+        <h2 class="title">Пожелания</h2>
+        <div class="divider"></div>
+        <div id="wishes"></div>
+      </section>
 
-        <fieldset class="field">
-          <legend>Присутствие</legend>
-          <label class="choice"><input type="radio" name="attend" value="yes" required> С радостью приду</label>
-          <label class="choice"><input type="radio" name="attend" value="no"> К сожалению, не смогу</label>
-        </fieldset>
+      <!-- ===== 9. АНКЕТА ГОСТЯ (RSVP) ===== -->
+      <section class="section reveal" data-block="rsvp" id="rsvp">
+        <p class="eyebrow">Анкета гостя</p>
+        <h2 class="title">Вы будете с нами?</h2>
+        <div class="divider"></div>
+        <p class="muted">
+          Пожалуйста, ответьте <span id="rsvpDeadline"></span>
+        </p>
 
-        <label class="field">
-          <span>Сколько человек вместе с вами</span>
-          <select name="guests">
-            <option value="1">Только я</option>
-            <option value="2">Двое</option>
-            <option value="3">Трое</option>
-            <option value="4">Четверо</option>
-          </select>
-        </label>
+        <form class="form" id="rsvpForm" novalidate>
+          <label class="field">
+            <span>Ваше имя и фамилия</span>
+            <input
+              type="text"
+              name="name"
+              required
+              autocomplete="name"
+              placeholder="Например, Ольга Иванова"
+            />
+          </label>
 
-        <fieldset class="field" id="drinksField">
-          <legend>Что предпочитаете из напитков</legend>
-          <div id="drinks"></div>
-        </fieldset>
+          <fieldset class="field">
+            <legend>Присутствие</legend>
+            <label class="choice"
+              ><input type="radio" name="attend" value="yes" required /> С
+              радостью приду</label
+            >
+            <label class="choice"
+              ><input type="radio" name="attend" value="no" /> К сожалению, не
+              смогу</label
+            >
+          </fieldset>
 
-        <label class="field">
-          <span>Комментарий или пожелание</span>
-          <textarea name="comment" rows="3" placeholder="Аллергии, пожелания паре…"></textarea>
-        </label>
+          <label class="field">
+            <span>Сколько человек вместе с вами</span>
+            <select name="guests">
+              <option value="1">Только я</option>
+              <option value="2">Двое</option>
+              <option value="3">Трое</option>
+              <option value="4">Четверо</option>
+            </select>
+          </label>
 
-        <button class="btn btn--full" type="submit">Отправить ответ</button>
-        <p class="form__status" id="rsvpStatus" role="status"></p>
-      </form>
-    </section>
+          <fieldset class="field" id="drinksField">
+            <legend>Что предпочитаете из напитков</legend>
+            <div id="drinks"></div>
+          </fieldset>
 
-    <!-- ===== 10. КОНТАКТЫ ===== -->
-    <section class="section section--surface reveal" data-block="contacts">
-      <p class="eyebrow">Остались вопросы?</p>
-      <h2 class="title">Контакты</h2>
-      <div class="divider"></div>
-      <ul class="contacts" id="contacts"></ul>
-    </section>
+          <label class="field">
+            <span>Комментарий или пожелание</span>
+            <textarea
+              name="comment"
+              rows="3"
+              placeholder="Аллергии, пожелания паре…"
+            ></textarea>
+          </label>
 
-  </main>
+          <button class="btn btn--full" type="submit">Отправить ответ</button>
+          <p class="form__status" id="rsvpStatus" role="status"></p>
+        </form>
+      </section>
 
-  <footer class="footer reveal" data-block="footer">
-    <p class="footer__text" id="footerText"></p>
-  </footer>
+      <!-- ===== 10. КОНТАКТЫ ===== -->
+      <section class="section section--surface reveal" data-block="contacts">
+        <p class="eyebrow">Остались вопросы?</p>
+        <h2 class="title">Контакты</h2>
+        <div class="divider"></div>
+        <ul class="contacts" id="contacts"></ul>
+      </section>
+    </main>
 
-  <script src="script.js"></script>
-</body>
+    <footer class="footer reveal" data-block="footer">
+      <p class="footer__text" id="footerText"></p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>
