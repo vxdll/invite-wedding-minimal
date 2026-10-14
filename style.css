@@ -1,0 +1,256 @@
+/* =========================================================
+   Шаблон «Минимализм». Цвета берутся из config.json → theme
+   (script.js записывает их в эти переменные).
+   ========================================================= */
+:root {
+  --bg: #F7F3EE;        /* фон страницы */
+  --surface: #FFFFFF;   /* фон «карточных» секций */
+  --text: #2B2A28;      /* основной текст */
+  --muted: #8A847B;     /* второстепенный текст */
+  --accent: #7D8B6A;    /* акцент: кнопки, линии, таймер */
+
+  --serif: "Cormorant Garamond", "Times New Roman", serif;
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --maxw: 560px;        /* ширина контента: сайт рассчитан на телефон */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+
+/* ---------- Общие элементы ---------- */
+.section {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 72px 24px;
+  text-align: center;
+}
+.section--surface {
+  max-width: none;
+  background: var(--surface);
+}
+.section--surface > * { max-width: calc(var(--maxw) - 48px); margin-left: auto; margin-right: auto; }
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(32px, 9vw, 44px);
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.divider {
+  width: 48px; height: 1px;
+  background: var(--accent);
+  margin: 18px auto 24px;
+}
+.lead { font-size: 17px; max-width: 34ch; margin: 0 auto; }
+.muted { color: var(--muted); font-size: 15px; }
+
+.btn {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 14px 32px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font: 500 13px/1 var(--sans);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.btn:hover { opacity: .85; }
+.btn--ghost { background: transparent; color: var(--accent); }
+.btn--full { width: 100%; }
+.btn:disabled { opacity: .5; cursor: default; }
+
+/* ---------- 1. Обложка ---------- */
+.cover {
+  position: relative;
+  min-height: 100svh;            /* ровно экран телефона */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+  background: var(--text);
+}
+.cover__photo {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  animation: coverZoom 2.4s ease-out forwards;
+}
+/* Затемнение снизу, чтобы белый текст читался на любом фото */
+.cover::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.05) 30%, rgba(0,0,0,.55));
+}
+.cover__content { position: relative; z-index: 1; padding: 0 24px 56px; }
+.cover .eyebrow { color: rgba(255,255,255,.85); }
+.cover__names {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(48px, 15vw, 76px);
+  line-height: 1.02;
+  display: flex; flex-direction: column; align-items: center;
+}
+.cover__amp { font-style: italic; font-size: .55em; opacity: .85; margin: 4px 0; }
+.cover__date {
+  margin-top: 18px;
+  font-size: 14px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+.cover__scroll {
+  display: inline-block; margin-top: 28px; color: #fff;
+  animation: bounce 2s infinite;
+}
+/* Если фото нет — спокойная обложка на фоне страницы */
+.cover--no-photo { background: var(--bg); color: var(--text); }
+.cover--no-photo::after { display: none; }
+.cover--no-photo .eyebrow { color: var(--muted); }
+.cover--no-photo .cover__scroll { color: var(--accent); }
+.cover--no-photo { align-items: center; }
+
+@keyframes coverZoom { to { transform: scale(1); } }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* ---------- 2. Таймер ---------- */
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 40px;
+  border-top: 1px solid rgba(0,0,0,.08);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+}
+.countdown__item { padding: 16px 0; }
+.countdown__item + .countdown__item { border-left: 1px solid rgba(0,0,0,.08); }
+.countdown__item span {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(30px, 9vw, 40px);
+  line-height: 1.1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.countdown__item small {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted);
+}
+
+/* ---------- 3. Календарь ---------- */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px 0;
+  margin-top: 20px;
+  font-size: 15px;
+}
+.calendar__head { font-size: 10px; letter-spacing: .15em; color: var(--muted); padding-bottom: 8px; }
+.calendar__day { height: 40px; display: flex; align-items: center; justify-content: center; position: relative; }
+.calendar__day--event { color: #fff; font-weight: 600; }
+.calendar__day--event::before {
+  content: ""; position: absolute; width: 36px; height: 36px; border-radius: 50%;
+  background: var(--accent); z-index: -1;
+}
+.calendar__day--event { z-index: 0; }
+
+/* ---------- 4. Программа ---------- */
+.timeline { list-style: none; text-align: left; position: relative; max-width: 360px; margin: 0 auto; }
+.timeline::before {
+  content: ""; position: absolute; left: 70px; top: 8px; bottom: 8px; width: 1px; background: var(--accent); opacity: .4;
+}
+.timeline li { display: grid; grid-template-columns: 70px 1fr; padding: 0 0 26px; position: relative; }
+.timeline li::before {
+  content: ""; position: absolute; left: 66px; top: 9px; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--bg); border: 1px solid var(--accent);
+}
+.timeline__time { font-family: var(--serif); font-size: 22px; line-height: 1.2; color: var(--accent); }
+.timeline__body { padding-left: 24px; }
+.timeline__title { font-weight: 500; }
+.timeline__note { font-size: 14px; color: var(--muted); }
+
+/* ---------- 5. Место + фото ---------- */
+.photo {
+  background: #ddd center/cover no-repeat;
+  border-radius: 2px;
+}
+.photo--wide { aspect-ratio: 4 / 3; margin-top: 28px; }
+
+/* ---------- 6. Дресс-код ---------- */
+.palette { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.palette span {
+  width: 44px; height: 44px; border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
+
+/* ---------- 7. Галерея ---------- */
+.gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; max-width: var(--maxw); margin: 0 auto; }
+.gallery .photo { aspect-ratio: 3 / 4; border-radius: 0; }
+.gallery .photo:only-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+
+/* ---------- 8. Пожелания ---------- */
+#wishes p { max-width: 34ch; margin: 0 auto; }
+#wishes p + p { margin-top: 18px; }
+
+/* ---------- 9. Анкета ---------- */
+.form { text-align: left; margin-top: 32px; }
+.field { display: block; border: 0; margin-bottom: 22px; }
+.field > span, .field > legend {
+  display: block; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+}
+.field input[type=text], .field select, .field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,.14);
+  border-radius: 2px;
+  background: var(--surface);
+  color: var(--text);
+  font: 16px var(--sans);      /* 16px — чтобы iPhone не зумил поле при фокусе */
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+.choice { display: flex; align-items: center; gap: 10px; padding: 6px 0; cursor: pointer; }
+.choice input { accent-color: var(--accent); width: 18px; height: 18px; }
+.form__status { margin-top: 14px; text-align: center; font-size: 15px; min-height: 1.6em; }
+.form__status--ok { color: var(--accent); }
+.form__status--err { color: #B0413E; }
+
+/* ---------- 10. Контакты ---------- */
+.contacts { list-style: none; }
+.contacts li + li { margin-top: 14px; }
+.contacts a { color: var(--text); text-decoration: none; font-size: 18px; border-bottom: 1px solid var(--accent); }
+.contacts small { display: block; color: var(--muted); font-size: 13px; }
+
+/* ---------- Футер ---------- */
+.footer { padding: 72px 24px 88px; text-align: center; }
+.footer__text { font-family: var(--serif); font-style: italic; font-size: 28px; }
+
+/* ---------- Плавное появление при прокрутке ---------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .cover__photo, .cover__scroll { animation: none; }
+}
+
+/* Скрытые блоки (нет данных в config.json) */
+[hidden] { display: none !important; }
